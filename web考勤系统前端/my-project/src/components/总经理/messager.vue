@@ -10,34 +10,22 @@
             </font>
           </h1>
         </menu-item>
-<router-link to="/check">
+<router-link to="/check3">
         <menu-item name="2">
           <icon type="ios-contact"></icon>
           考勤检查
         </menu-item>
         </router-link>
-        <router-link to="/leavedeals">
+        <router-link to="/leavedeals3">
         <menu-item name="3">
           <icon type="ios-contact"></icon>
           请假审批
         </menu-item>
         </router-link>
-        <router-link to="/outdeals">
+        <router-link to="/outdeals3">
         <menu-item name="4">
           <icon type="ios-contact"></icon>
           外出审批
-        </menu-item>
-        </router-link>
-        <router-link to="/leave2">
-        <menu-item name="5">
-          <icon type="ios-contact"></icon>
-          请假申请
-        </menu-item>
-        </router-link>
-        <router-link to="/out2">
-        <menu-item name="6">
-          <icon type="ios-contact"></icon>
-          外出申请
         </menu-item>
         </router-link>
       </div>

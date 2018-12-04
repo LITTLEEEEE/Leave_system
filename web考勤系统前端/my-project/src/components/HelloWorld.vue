@@ -69,10 +69,10 @@ export default {
         this.$router.push({name:'messager',params:{changemessage: true}});
       }
       else if(this.model1 == 'deputy_general_manager'){
-        this.$router.push({name:'manager_vice',params:{changemessage: true}});
+        this.$router.push({name:'messager2',params:{changemessage: true}});
       }
       else{
-        this.$router.push({name:'general_manager',params:{changemessage: true}});
+        this.$router.push({name:'messager3',params:{changemessage: true}});
       }
 
 
