@@ -1,6 +1,6 @@
-# my-project
+# 公司考勤管理系统
 
-> A Vue.js project
+> A Vue.js project 基于vue cli的单页面web应用程序
 
 ## Build Setup
 
