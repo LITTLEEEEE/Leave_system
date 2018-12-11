@@ -17,7 +17,7 @@
         </menu-item>
         </router-link>
         <router-link to="/leavedeals2">
-        <menu-item name="3">
+        <menu-item name="3" >
           <icon type="ios-contact"></icon>
           请假审批
         </menu-item>
@@ -51,8 +51,10 @@
 
 <script>
     export default {
-        name: "messager"
+        name: "messager",
+
     }
+
 </script>
 
 <style scoped>

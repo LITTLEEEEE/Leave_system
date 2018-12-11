@@ -1,5 +1,5 @@
 <template>
-  <div :style="{backgroundImage: 'url(' + img + ')'}" style=" position: absolute; top: 0px;width: 1450px; height: 800px; background-repeat: no-repeat; background-size: cover">
+  <div :style="{backgroundImage: 'url(' + img + ')'}" style=" position: absolute; top: 0px;width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover">
     <div class="first-words">
       <p style="font-size: 70px; position:absolute; color: white; top: 100px; left: 100px">
         考勤-管理系统
@@ -62,17 +62,43 @@ export default {
   methods:{
     login(){
       //this.$Message.info(this.model1);
+      // this.$axios.post("url",{id:this.id, passwords:this.passwords})
+      //   .then((response) => {
+      //
+      //     if (response.data != "false") {
+      //       this.$Message.info("提交成功");
+      //       sessionStorage.setItem("userName", this.id);
+      //       //sessionStorage.setItem("userToken", )
+      //     }
+      //     else {
+      //       this.$Message.info("账号不正确或连接失败，请重试");
+      //     }
+      //
+      //   })
+      //   .catch(function (error) {
+      //     //this.$Message.info("服务器出错，注册失败" + error.data);
+      //     console.log(error)
+      //   });
+      sessionStorage.setItem("userId",this.id);
+      sessionStorage.setItem("userToken", this.model1);
+      sessionStorage.setItem("userDepartment", this.model1);
+      // this.$store.dispatch("setUser",this.id);
+      // this.$store.dispatch("setToken", this.model1);
+      //console.log(this.$store.state.isLogin);
+      console.log(sessionStorage.getItem("userId"));
+      console.log(sessionStorage.getItem("userToken"));
+      console.log(sessionStorage.getItem("userDepartment"));
       if(this.model1 == 'staff'){
-        this.$router.push({name:'user',params:{changemessage: true}});
+        this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
       }
       else if(this.model1 == 'department_manager'){
-        this.$router.push({name:'messager',params:{changemessage: true}});
+        this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
       }
       else if(this.model1 == 'deputy_general_manager'){
-        this.$router.push({name:'messager2',params:{changemessage: true}});
+        this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
       }
       else{
-        this.$router.push({name:'messager3',params:{changemessage: true}});
+        this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
       }
 
 

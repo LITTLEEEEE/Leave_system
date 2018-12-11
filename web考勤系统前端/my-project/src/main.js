@@ -5,8 +5,12 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import axios from "axios";
+import Vuex from 'vuex'
+//import store from './store/store'
 import 'iview/dist/styles/iview.css'    // 使用 CSS
-Vue.use(iView)
+Vue.use(iView);
+Vue.use(Vuex);
+
 Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false
@@ -15,6 +19,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  //store,
   components: { App },
   template: '<App/>'
 })

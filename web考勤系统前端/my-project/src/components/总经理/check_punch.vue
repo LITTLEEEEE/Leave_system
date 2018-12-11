@@ -33,10 +33,10 @@
 
     <Table :columns="columns8" :data="data7" size="small" ref="table" style="position: absolute; top: 70px; left: 30px"></Table>
     <br>
-    <Button type="defult" size="large"@click="get_punch()" style="position:absolute;top: 70px;left: 850px;"><Icon type="ios-download-outline"></Icon> 刷新员工打卡表 </Button>
-    <Button type="defult" size="large" @click="exportData(1)" style="position:absolute;top: 110px;left: 850px"><Icon type="ios-download-outline"></Icon> 原始数据下载 </Button>
-    <Button type="defult" size="large" @click="exportData(2)" style="position:absolute;top: 150px;left: 850px"><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
-    <Button type="defult" size="large" @click="exportData(3)" style="position:absolute;top: 190px;left: 850px"><Icon type="ios-download-outline"></Icon> 基础数据下载</Button>
+    <Button type="default" size="large"@click="get_punch()" style="position:absolute;top: 70px;left: 850px;"><Icon type="ios-download-outline"></Icon> 刷新员工打卡表 </Button>
+    <Button type="default" size="large" @click="exportData(1)" style="position:absolute;top: 110px;left: 850px"><Icon type="ios-download-outline"></Icon> 原始数据下载 </Button>
+    <Button type="default" size="large" @click="exportData(2)" style="position:absolute;top: 150px;left: 850px"><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
+    <Button type="default" size="large" @click="exportData(3)" style="position:absolute;top: 190px;left: 850px"><Icon type="ios-download-outline"></Icon> 基础数据下载</Button>
 
   </div>
 </template>

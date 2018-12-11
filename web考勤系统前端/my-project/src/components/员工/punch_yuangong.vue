@@ -48,12 +48,63 @@
         </router-link>
       </div>
     </i-menu>
+
+    <p style="position: absolute; top: 65px;left: 30px;font-size: 20px">输入您的账号</p>
+    <Input prefix="ios-contact" placeholder="输入卡号" v-model="id" style="width: auto; position: absolute; top: 65px; left: 200px"></Input>
+    <Button @click="punch(1)">打卡上班</Button>
+    <Button type="primary" @click="punch(0)">打卡下班</Button>
   </div>
+
 </template>
 
 <script>
   export default {
     name: "user",
+    data(){
+      return{
+        id:'',
+      }
+    },
+    methods: {
+      punch(index) {
+        if(index == 1){
+          this.$axios.post('/api/punch', {id:id, function: '1'})
+            .then((response) => {
+
+              if (response.data == true) {
+                this.$Message.info("打卡上班成功");
+              }
+              else {
+                this.$Message.info("账号不正确或连接失败，请重试");
+              }
+
+            })
+            .catch(function (error) {
+              //this.$Message.info("服务器出错，注册失败" + error.data);
+              console.log(error)
+            });
+
+        }else{
+          this.$axios.post('/api/punch', {id:id, function: '2'})
+            .then((response) => {
+
+              if (response.data == true) {
+                this.$Message.info("打卡下班成功");
+              }
+              else {
+                this.$Message.info("账号不正确或连接失败，请重试");
+              }
+
+            })
+            .catch(function (error) {
+              //this.$Message.info("服务器出错，注册失败" + error.data);
+              console.log(error)
+            });
+
+        }
+
+      }
+    }
 
   }
 </script>
