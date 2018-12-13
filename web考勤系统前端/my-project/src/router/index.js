@@ -15,15 +15,11 @@ import Leave2 from '@/components/部门经理/leave'
 import leave_deals from '@/components/部门经理/leave_deals'
 import check from '@/components/部门经理/check_punch'
 import Messager2 from '@/components/副总经理/messager'
-import Out_deals2 from '@/components/副总经理/out_deals'
-import Out3 from '@/components/副总经理/out'
-import Leave3 from '@/components/副总经理/leave'
-import leave_deals2 from '@/components/副总经理/leave_deals'
-import check2 from '@/components/副总经理/check_punch'
 import check3 from '@/components/总经理/check_punch'
 import leave_deals3 from '@/components/总经理/leave_deals'
 import out_deals3 from '@/components/总经理/out_deals'
 import Messager3 from '@/components/总经理/messager'
+import Punch2 from '@/components/部门经理/punch'
 
 Vue.use(Router)
 
@@ -99,36 +95,13 @@ export default new Router({
       name: 'leavedeals',
       component: leave_deals
     },
-    {
-      path: '/leavedeals2',
-      name: 'leavedeals2',
-      component: leave_deals2
-    },
+
     {
       path: '/messager2',
       name: 'messager2',
       component: Messager2
     },
-    {
-      path: '/outdeals2',
-      name: 'outdeals2',
-      component: Out_deals2
-    },
-    {
-      path: '/out3',
-      name: 'out3',
-      component: Out3
-    },
-    {
-      path: '/leave3',
-      name: 'leave3',
-      component: Leave3
-    },
-    {
-      path: '/check2',
-      name: 'check2',
-      component: check2
-    },
+
     {
       path: '/check3',
       name: 'check3',
@@ -149,6 +122,11 @@ export default new Router({
       name: 'outdeals3',
       component: out_deals3
     },
+    {
+      path: '/punch2',
+      name: 'punch2',
+      component: Punch2
+    }
 
   ]
 })

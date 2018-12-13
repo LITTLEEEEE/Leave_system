@@ -48,22 +48,22 @@
         </router-link>
       </div>
     </i-menu>
-    <strong style="position:absolute; left: 50px; top: 100px;font-size: 70px">
-      Hello
-    </strong>
-    <p style="position:absolute; left: 250px; top: 130px;font-size: 40px" >
-      {{Name}}
-    </p>
-    <p style="position:absolute; left: 50px; top: 200px;font-size: 40px">
-      您的卡号
-    </p>
-    <p style="position:absolute; left: 250px; top: 200px;font-size: 40px">
-      {{this.$route.params.id}}
-    </p>
-    <p style="position:absolute; left: 50px; top: 250px;font-size: 40px">
-      您的部门
-    </p>
-    <p style="position:absolute; left: 250px; top: 250px;font-size: 40px">{{Department}}</p>
+    <!--<strong style="position:absolute; left: 50px; top: 100px;font-size: 70px">-->
+      <!--Hello-->
+    <!--</strong>-->
+    <!--<p style="position:absolute; left: 250px; top: 130px;font-size: 40px" >-->
+      <!--{{Name}}-->
+    <!--</p>-->
+    <!--<p style="position:absolute; left: 50px; top: 200px;font-size: 40px">-->
+      <!--您的卡号-->
+    <!--</p>-->
+    <!--<p style="position:absolute; left: 250px; top: 200px;font-size: 40px">-->
+      <!--{{this.$route.params.id}}-->
+    <!--</p>-->
+    <!--<p style="position:absolute; left: 50px; top: 250px;font-size: 40px">-->
+      <!--您的部门-->
+    <!--</p>-->
+    <!--<p style="position:absolute; left: 250px; top: 250px;font-size: 40px">{{Department}}</p>-->
 
     <!--<strong style="font-size: 60px; position:absolute;left: 100px;top: 500px;">-->
       <!--欢迎上班，开启全新的一天!(记得打卡哦！！！）-->
@@ -84,34 +84,35 @@
       data(){
           return{
              Name:sessionStorage.getItem("userId"),
-            Department:sessionStorage.getItem("userDepartment"),
+
+            // Department:sessionStorage.getItem("userDepartment"),
           }
       },
-      mounted:function () {
-        this.getMessage();
-      },
-      methods:{
-          getMessage(){
-            this.$axios.post('/api/get', {id: this.$route.params.id})
-              .then((response) => {
-
-                if (response.data == true) {
-                  this.$Message.info("提交成功");
-                  this.Name = response.data.name;
-                  this.Department = response.data.department;
-                }
-                else {
-                  this.$Message.info("账号不正确或连接失败，请重试");
-                }
-
-              })
-              .catch(function (error) {
-                //this.$Message.info("服务器出错，注册失败" + error.data);
-                console.log(error)
-              });
-
-          }
-      }
+      // mounted:function () {
+      //   this.getMessage();
+      // },
+      // methods:{
+      //     getMessage(){
+      //       this.$axios.post('/api/get', {id: this.$route.params.id})
+      //         .then((response) => {
+      //
+      //           if (response.data == true) {
+      //             this.$Message.info("提交成功");
+      //             this.Name = response.data.name;
+      //
+      //           }
+      //           else {
+      //             this.$Message.info("账号不正确或连接失败，请重试");
+      //           }
+      //
+      //         })
+      //         .catch(function (error) {
+      //           //this.$Message.info("服务器出错，注册失败" + error.data);
+      //           console.log(error)
+      //         });
+      //
+      //     }
+      // }
     }
 </script>
 

@@ -62,16 +62,29 @@ export default {
   methods:{
     login(){
       //this.$Message.info(this.model1);
-      // this.$axios.post("url",{id:this.id, passwords:this.passwords})
+      // this.$axios.post("/login",{id:this.id, passwords:this.passwords})
       //   .then((response) => {
       //
-      //     if (response.data != "false") {
+      //     if (response.data.result == true) {
       //       this.$Message.info("提交成功");
-      //       sessionStorage.setItem("userName", this.id);
-      //       //sessionStorage.setItem("userToken", )
+      //       sessionStorage.setItem("userId", this.id);
+      //       sessionStorage.setItem("userStatus",response.data.status);
+      //       //sessionStorage.setItem("userToken", response.data.token);
+      //       if(sessionStorage.getItem("userStatus") == "staff"){
+      //         this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
+      //       }
+      //       else if(sessionStorage.getItem("userStatus") == "department_manager"){
+      //         this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
+      //       }
+      //       else if(sessionStorage.getItem("userStatus") == 'deputy_general_manager'){
+      //         this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
+      //       }
+      //       else {
+      //         this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
+      //       }
       //     }
       //     else {
-      //       this.$Message.info("账号不正确或连接失败，请重试");
+      //       this.$Message.info("账号或密码不正确请重试");
       //     }
       //
       //   })
@@ -79,15 +92,16 @@ export default {
       //     //this.$Message.info("服务器出错，注册失败" + error.data);
       //     console.log(error)
       //   });
+
       sessionStorage.setItem("userId",this.id);
       sessionStorage.setItem("userToken", this.model1);
-      sessionStorage.setItem("userDepartment", this.model1);
-      // this.$store.dispatch("setUser",this.id);
+      sessionStorage.setItem("userStatus", this.model1);
+      //this.$store.dispatch("setUser",this.id);
       // this.$store.dispatch("setToken", this.model1);
       //console.log(this.$store.state.isLogin);
       console.log(sessionStorage.getItem("userId"));
       console.log(sessionStorage.getItem("userToken"));
-      console.log(sessionStorage.getItem("userDepartment"));
+      console.log(sessionStorage.getItem("userStatus"));
       if(this.model1 == 'staff'){
         this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
       }

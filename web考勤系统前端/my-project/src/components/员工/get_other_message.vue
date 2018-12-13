@@ -48,16 +48,95 @@
         </router-link>
       </div>
     </i-menu>
-
-
-
+    <br>
+    <Table stripe border :columns="columns8" :data="data7" size="small" ref="table" style="position: absolute; width: 1000px;left: 50px"></Table>
+    <Button type="default" size="large" @click="get_others()" style="position: absolute; left: 1100px"><Icon type="ios-download-outline"></Icon> 刷新员工请假表 </Button>
   </div>
 
 </template>
 
 <script>
     export default {
-        name: "get_other_message"
+        name: "get_other_message",
+      data(){
+          return{
+            date:new Date(),
+            id:sessionStorage.getItem("userId"),
+            status:sessionStorage.getItem("userStatus"),
+            columns8: [
+              {
+                "title": "同事id",
+                "key": "u_id",
+                "width": 150,
+                "sortable":true
+              },
+              {
+                "title": "同事姓名",
+                "key": "u_name",
+
+                "width": 150,
+                "sortable":true
+              },
+              {
+                "title": "工作信息",
+                "key": "u_work",
+                "width": 300,
+              },
+              {
+                "title": "开始时间",
+                "key": "time_start",
+                "width": 200,
+                "sortable": true
+              },
+              {
+                "title": "结束时间",
+                "key": "time_end",
+                "width": 200,
+                "sortable": true
+              },
+
+            ],
+            data7: [
+              {
+                "time_start":"2018-1-3",
+                "time_end":"2018-1-7",
+                "u_id":"3016218125",
+               "u_name":"李狗蛋",
+                "u_work":"项目开发"
+
+              }
+
+            ]
+
+          }
+      },
+      mounted:function () {
+        this.getMessage();
+      },
+      methods:{
+        getMessage() {
+          this.$axios.post('/api/getOthers', {id: this.id,time:this.date.toLocaleDateString()})
+            .then((response) => {
+              this.$Message.info("提交成功");
+              this.data7 = response.data;
+            })
+            .catch(function (error) {
+              //this.$Message.info("服务器出错，注册失败" + error.data);
+              console.log(error)
+            });
+        },
+          get_others(){
+            this.$axios.post('/api/getOthers', {id:this.id,time:this.date.toLocaleDateString()})
+              .then((response) => {
+                this.data7 = response.data;
+              })
+              .catch((error) => {
+                // this.$Message.info("搜索失败");
+                console.log(error);
+              });
+
+          }
+      }
     }
 </script>
 

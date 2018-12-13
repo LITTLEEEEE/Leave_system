@@ -37,6 +37,9 @@
     <Button type="default" size="large" @click="exportData(2)" ><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
     <br>
     <br>
+    <Input v-model="description" placeholder="输入您的处理原因"></Input>
+
+
     <Table stripe border :columns="columns8" :data="data7" size="small" ref="table" ></Table>
 
 
@@ -50,18 +53,29 @@
 
       data () {
         return {
+          description:"",
+          id:sessionStorage.getItem("userId"),
+          status:sessionStorage.getItem("userStatus"),
           columns8: [
             {
-              "title": "编号",
+              "title": "事务编号",
               "key": "d_id",
+              "width": 100,
               "fixed": "left",
-              "width": 200
+              "sortable":true,
             },
             {
               "title": "员工编号",
               "key": "u_id",
+              "width": 100,
+              "sortable":true,
+            },
+            {
+              "title": "员工姓名",
+              "key": "u_name",
 
-              "width": 100
+              "width": 100,
+              "sortable":true
             },
             {
               "title": "请假类型",
@@ -72,23 +86,36 @@
             {
               "title": "请假原因详情",
               "key": "reason",
-              "width": 550,
+              "width": 300,
               //"sortable": true
+            },
+            {
+              "title": "开始时间",
+              "key": "time_start",
+              "width": 150,
+              "sortable":true,
+            },
+            {
+              "title": "结束时间",
+              "key": "time_end",
+              "width": 150,
+              "sortable":true
             },
             {
               "title": "请假天数",
               "key": "days",
-              "width": 100,
+              "width": 120,
+              "sortable":true
             },
             {
               "title": "年假剩余",
-              "key": "rest_days",
+              "key": "left_days",
               "width": 100,
             },
             {
               title: '审批',
               key: 'action',
-              width: 250,
+              width: 200,
               align: 'center',
               render: (h, params) => {
                 return h('div', [
@@ -128,10 +155,13 @@
             {
               "d_id":"1",
               "u_id":"1",
+              "u_name":"李狗蛋",
               "item":"病假",
               "reason":"发烧感冒四肢无力腰酸背痛手脚冰凉",
               "days":3,
-              "rest_days":5
+              "left_days":5,
+              "time_start":'2017-1-5',
+              "time_end":'2017-1-8',
             }
 
           ]
@@ -157,7 +187,7 @@
           }
         },
         get_leaves(){
-          this.$axios.post('/api/leave_deals', {status : "general_manager"})
+          this.$axios.post('/api/leaveDeals', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -167,9 +197,15 @@
             });
         },
         show(index){
-          this.$axios.post('/api/admit', {status : "general_manager",d_id:this.data7[index].d_id, uid:this.data7[index].uid,admission: true})
+          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description})
             .then((response)=> {
               console.log(response);
+              if(response.data.result == true){
+                this.$Message.info("处理成功");
+              }
+              else{
+                this.$Message.info("处理失败请重新提交");
+              }
             })
             .catch((error)=> {
               // this.$Message.info("搜索失败");
@@ -177,9 +213,15 @@
             });
         },
         remove(index){
-          this.$axios.post('/api/admit', {status : "general_manager",d_id:this.data7[index].d_id, uid:this.data7[index].uid,admission: false})
+          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description})
             .then((response)=> {
               console.log(response);
+              if(response.data.result == true){
+                this.$Message.info("处理成功");
+              }
+              else{
+                this.$Message.info("处理失败请重新提交");
+              }
             })
             .catch((error)=> {
               // this.$Message.info("搜索失败");

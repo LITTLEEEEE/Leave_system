@@ -48,12 +48,82 @@
         </router-link>
       </div>
     </i-menu>
+    <br/>
+
+
+    <Button type="default" @click="getPunch()" style="position: absolute;left: 1100px">刷新</Button>
+
+    <Table border :columns="columns5" :data="data5" style="position: absolute;left: 20px;width: 1000px"></Table>
   </div>
 </template>
 
 <script>
     export default {
-        name: "getPunch"
+        name: "getPunch",
+      data(){
+          return{
+            id:sessionStorage.getItem("userId"),
+            status:sessionStorage.getItem("userStatus"),
+            columns5: [
+              {
+                title: '日期',
+                key: 'date',
+                sortable: true
+              },
+
+              {
+                title: '打卡信息',
+                key: 'punch',
+                sortable:true
+              },
+
+            ],
+            data5: [
+              {
+                date: '2016-10-03',
+                punch:'已打卡'
+              },
+              {
+
+                date: '2016-10-01',
+                punch:'未打卡'
+              },
+              {
+                date: '2016-10-02',
+                punch:'已打卡'
+              },
+
+            ]
+          }
+      },
+      mounted:function () {
+        this.getMessage();
+      },
+
+      methods: {
+        getMessage() {
+          this.$axios.post('/api/getPunch', {id: this.id,status:this.status})
+            .then((response) => {
+                this.$Message.info("提交成功");
+                this.data5 = response.data;
+            })
+            .catch(function (error) {
+              //this.$Message.info("服务器出错，注册失败" + error.data);
+              console.log(error)
+            });
+        },
+        getPunch(){
+          this.$axios.post('/api/getPunch', {id: this.id,status:this.status})
+            .then((response) => {
+                this.$Message.info("提交成功");
+                this.data5 = response.data;
+            })
+            .catch(function (error) {
+              //this.$Message.info("服务器出错，注册失败" + error.data);
+              console.log(error)
+            });
+        }
+      }
     }
 </script>
 

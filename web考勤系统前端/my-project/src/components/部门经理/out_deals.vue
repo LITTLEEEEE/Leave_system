@@ -10,6 +10,12 @@
             </font>
           </h1>
         </menu-item>
+        <router-link to="/punch2">
+          <menu-item name="2">
+            <icon type="ios-contact"></icon>
+            打卡
+          </menu-item>
+        </router-link>
         <router-link to="/check">
           <menu-item name="2">
             <icon type="ios-contact"></icon>
@@ -48,6 +54,7 @@
     <Button type="default" size="large" @click="exportData(2)" ><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
     <br>
     <br>
+    <Input v-model="description" placeholder="输入您的处理原因"></Input>
     <Table stripe border :columns="columns8" :data="data7" size="small" ref="table" ></Table>
 
 
@@ -59,34 +66,55 @@
         name: "out_deals",
       data () {
         return {
+          id:sessionStorage.getItem("userId"),
+          status:sessionStorage.getItem("userStatus"),
+          description:'',
           columns8: [
             {
-              "title": "编号",
-              "key": "o_id",
+              "title": "事务编号",
+              "key": "d_id",
               "fixed": "left",
-              "width": 200
+              "width": 120
             },
             {
               "title": "员工编号",
               "key": "u_id",
-
-              "width": 100
+              "sortable":true,
+              "width": 120
             },
             {
-              "title": "请假原因详情",
+              "title": "员工姓名",
+              "key": "u_name",
+              "sortable":true,
+              "width": 120
+            },
+            {
+              "title": "外出原因详情",
               "key": "reason",
-              "width": 550,
+              "width": 300,
               //"sortable": true
             },
             {
-              "title": "请假天数",
+              "title": "开始时间",
+              "key": "time_start",
+              "width": 120,
+              "sortable": true
+            },
+            {
+              "title": "结束时间",
+              "key": "time_end",
+              "width": 120,
+              "sortable": true
+            },
+            {
+              "title": "外出天数",
               "key": "days",
               "width": 100,
             },
             {
               title: '审批',
               key: 'action',
-              width: 250,
+              width: 200,
               align: 'center',
               render: (h, params) => {
                 return h('div', [
@@ -124,11 +152,13 @@
           ],
           data7: [
             {
-              "o_id":"1",
+              "d_id":"1",
               "u_id":"1",
-
+              "u_name":'李狗蛋',
               "reason":"出差",
               "days":3,
+              "time_start":'2018-1-4',
+              "time_end":'2018-1-7',
 
             }
 
@@ -155,7 +185,7 @@
           }
         },
         get_outs(){
-          this.$axios.post('/api/leave_deals', {status:'department_manager'})//还未处理过的员工的请假信息
+          this.$axios.post('/api/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -165,9 +195,14 @@
             });
         },
         show(index){//部门经理通过
-          this.$axios.post('/api/admit2', {o_id:this.data7[index].o_id, uid:this.data7[index].uid,admission: true,status:'department_manager'})
+          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description})
             .then((response)=> {
               console.log(response);
+              if(response.data.result == true){
+                this.$Message.info("处理成功");
+              }else{
+                this.$Message.info("处理失败重新提交");
+              }
             })
             .catch((error)=> {
               // this.$Message.info("搜索失败");
@@ -175,9 +210,15 @@
             });
         },
         remove(index){//部门经理未通过
-          this.$axios.post('/api/admit2', {o_id:this.data7[index].o_id, uid:this.data7[index].uid,admission: false,status:'department_manager'})
+          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description})
             .then((response)=> {
               console.log(response);
+              if(response.data.result == true){
+                this.$Message.info("处理成功");
+              }
+              else{
+                this.$Message.info("处理失败请重新提交");
+              }
             })
             .catch((error)=> {
               // this.$Message.info("搜索失败");

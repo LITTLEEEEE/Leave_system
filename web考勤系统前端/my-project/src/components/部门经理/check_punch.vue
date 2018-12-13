@@ -10,6 +10,12 @@
             </font>
           </h1>
         </menu-item>
+        <router-link to="/punch2">
+          <menu-item name="2">
+            <icon type="ios-contact"></icon>
+            打卡
+          </menu-item>
+        </router-link>
         <router-link to="/check">
           <menu-item name="2">
             <icon type="ios-contact"></icon>
@@ -42,12 +48,12 @@
         </router-link>
       </div>
     </i-menu>
-    <Table :columns="columns8" :data="data7" size="small" ref="table" style="position: absolute; top: 70px; left: 30px"></Table>
-    <br>
-    <Button type="defult" size="large"@click="get_punch()" style="position:absolute;top: 70px;left: 850px;"><Icon type="ios-download-outline"></Icon> 刷新员工打卡表 </Button>
-    <Button type="defult" size="large" @click="exportData(1)" style="position:absolute;top: 110px;left: 850px"><Icon type="ios-download-outline"></Icon> 原始数据下载 </Button>
-    <Button type="defult" size="large" @click="exportData(2)" style="position:absolute;top: 150px;left: 850px"><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
-    <Button type="defult" size="large" @click="exportData(3)" style="position:absolute;top: 190px;left: 850px"><Icon type="ios-download-outline"></Icon> 基础数据下载</Button>
+    <Table :columns="columns8" :data="data7" size="small" ref="table" style="position: absolute; top: 130px; left: 30px"></Table>
+
+    <Button type="defult" size="large"@click="get_punch()" style="position:absolute;top: 70px;left: 50px;"><Icon type="ios-download-outline"></Icon> 刷新员工打卡表 </Button>
+    <Button type="defult" size="large" @click="exportData(1)" style="position:absolute;top: 70px;left: 220px"><Icon type="ios-download-outline"></Icon> 原始数据下载 </Button>
+    <Button type="defult" size="large" @click="exportData(2)" style="position:absolute;top: 70px;left: 380px"><Icon type="ios-download-outline"></Icon> 处理后数据下载</Button>
+    <Button type="defult" size="large" @click="exportData(3)" style="position:absolute;top: 70px;left: 550px"><Icon type="ios-download-outline"></Icon> 基础数据下载</Button>
 
   </div>
 </template>
@@ -57,13 +63,29 @@
         name: "check_punch",
       data () {
         return {
+          id:sessionStorage.getItem("userId"),
+          status:sessionStorage.getItem("userStatus"),
+
           columns8: [
             {
-              "title": "姓名",
-              "key": "name",
-              "fixed": "left",
+              "title": "id",
+              "key": "u_id",
+              //"fixed": "left",
               "width": 200
             },
+            {
+              "title": "姓名",
+              "key": "u_name",
+              //"fixed": "left",
+              "width": 200
+            },
+            {
+              "title": "事务",
+              "key": "u_work",
+              //"fixed": "left",
+              "width": 200
+            },
+
             {
               "title": "打卡状态",
               "key": "state",
@@ -76,85 +98,67 @@
                 },
                 {
                   label: '未打卡上班',
-                  value: 2
+                  value: 4
                 },
                 {
                   label: '请假中',
                   value: 2
+                },
+                {
+                  label: '外出中',
+                  value: 3
                 },
               ],
               filterMultiple: false,
               filterMethod (value, row) {
                 if (value === 1) {
                   return row.state == 1;
-                } else if (value === 2) {
-                  return row.state ==0 ;
+                } else if (value === 4) {
+                  return row.state == 0;
                 }else if(value === 3){
                   return row.state == 2;
+                }else{
+                  return row.state == 3;
                 }
               }
             },
-            {
-              "title": "编号",
-              "key": "id",
-              "width": 150,
-              "sortable": true
-            },
+
             {
               "title": "打卡时间",
               "key": "time",
               "width": 150,
               "sortable": true
             },
-            {
-              "title": "部门",
-              "key": "department",
-              "width": 150,
-              "sortable": true
-            },
+
 
           ],
           data7: [
             {
-              "name": "Name1",
+              "u_name": "李狗蛋",
               "state" : 1,
-              "id" : '3016218128',
+              "u_id" : '3016218125',
               "time": '2017-1-1',
-              "department":'215'
+              "u_work":'睡觉'
             },
-            {
-              "name": "Name2",
-              "state" : 0,
-              "id" : '3016218129',
-              "time": '2017-1-1',
-              "department":'215'
-            },
-            {
-              "name": "Name3",
-              "state" : 1,
-              "id" : '3016218120',
-              "time": '2017-1-1',
-              "department":'215'
-            },
-            {
-              "name": "Name4",
-              "state" : 1,
-              "id" : '3016218126',
-              "time": '2017-1-2',
-              "department":'215'
-            },
-            {
-              "name": "Name5",
-              "state" : 0,
-              "id" : '3016218190',
-              "time": '2017-1-2',
-              "department":'215'
-            },
+
 
           ]
         }
       },
+      mounted:function () {
+        this.getMessage();
+      },
       methods: {
+          getMessage(){
+            this.$axios.post('/api/check', {status:this.status,id:this.id})
+              .then((response)=> {
+                this.data7 = response.data;
+              })
+              .catch((error)=> {
+                // this.$Message.info("搜索失败");
+                console.log(error);
+              });
+          },
         exportData(type) {
           if (type === 1) {
             this.$refs.table.exportCsv({
@@ -174,7 +178,7 @@
           }
         },
         get_punch(){//name,state,id,time,department json数组
-          this.$axios.post('/api/check', {status:'department_manager'})
+          this.$axios.post('/api/check', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })

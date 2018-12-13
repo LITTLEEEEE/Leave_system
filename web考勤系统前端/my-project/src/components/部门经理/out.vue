@@ -10,6 +10,12 @@
             </font>
           </h1>
         </menu-item>
+        <router-link to="/punch2">
+          <menu-item name="2">
+            <icon type="ios-contact"></icon>
+            打卡
+          </menu-item>
+        </router-link>
         <router-link to="/check">
           <menu-item name="2">
             <icon type="ios-contact"></icon>
@@ -70,8 +76,9 @@
         name: "out",
       data(){
         return{
+          status:sessionStorage.getItem("userStatus"),
           formValidate: {
-            id: '',
+            id: sessionStorage.getItem("userId"),
 
             reason: '',
             days: 0,
@@ -106,14 +113,14 @@
               console.log(this.dataValue);
               console.log(this.dataValue[1]);
               console.log(this.dataValue[0]);//卡号，原因，原因类别，开始时间，结束时间，天数，
-              this.$axios.post('/api/out2', {status:'department_manager',id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
+              this.$axios.post('/api/out', {status:this.status,id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
                 .then((response) => {
 
                   if (response.data == true) {
                     this.$Message.info("提交成功");
                   }
                   else {
-                    this.$Message.info("账号不正确或连接失败，请重试");
+                    this.$Message.info("申请失败请重试");
                   }
 
                 })

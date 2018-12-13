@@ -10,7 +10,13 @@
             </font>
           </h1>
         </menu-item>
-<router-link to="/check">
+        <router-link to="/punch2">
+          <menu-item name="2">
+            <icon type="ios-contact"></icon>
+            打卡
+          </menu-item>
+        </router-link>
+        <router-link to="/check">
         <menu-item name="2">
           <icon type="ios-contact"></icon>
           考勤检查
@@ -51,7 +57,7 @@
 
 <script>
     export default {
-        name: "messager"
+        name: "messager",
     }
 </script>
 

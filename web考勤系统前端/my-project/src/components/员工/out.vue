@@ -38,7 +38,7 @@
           <menu-item name="6">
             <icon type="ios-contact"></icon>
             请假信息查询
-          </menu-item>
+          </menu-item>t
         </router-link>
         <router-link to="/others">
           <menu-item name="6">
@@ -76,8 +76,8 @@
       data(){
         return{
           formValidate: {
-            id: '',
-
+            id: sessionStorage.getItem("userId"),
+            status:sessionStorage.getItem("userStatus"),
             reason: '',
             days: 0,
 
@@ -110,14 +110,14 @@
               console.log(this.dataValue);
               console.log(this.dataValue[1]);
               console.log(this.dataValue[0]);//卡号，原因，原因类别，开始时间，结束时间，天数，
-              this.$axios.post('/api/out2', {status : "vice_general_manager",id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
+              this.$axios.post('/api/out', {status : this.status,id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
                 .then((response) => {
 
-                  if (response.data == true) {
+                  if (response.data.result == true) {
                     this.$Message.info("提交成功");
                   }
                   else {
-                    this.$Message.info("账号不正确或连接失败，请重试");
+                    this.$Message.info("提交失败请重试");
                   }
 
                 })

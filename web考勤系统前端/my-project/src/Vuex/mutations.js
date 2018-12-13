@@ -5,7 +5,7 @@ export const userStatus = (state,user) =>{
   }else if(user == null){
     sessionStorage.setItem("userId", null);
     sessionStorage.setItem("userToken", "");
-    sessionStorage.setItem("userDepartment","");
+    sessionStorage.setItem("userStatus","");
     state.currentUser = null;
     state.isLogin = false;
     state.token = "";
