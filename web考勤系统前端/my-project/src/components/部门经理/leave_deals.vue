@@ -184,6 +184,9 @@
           ]
         }
       },
+      mounted:function () {
+        this.getMessage();
+      },
       methods: {
         exportData(type) {
           if (type === 1) {
@@ -202,6 +205,16 @@
               data: this.data7.filter((data, index) => index < 3)
             });
           }
+        },
+        getMessage(){
+          this.$axios.post('/api/leaveDeals', {status:this.status,id:this.id})
+            .then((response)=> {
+              this.data7 = response.data;
+            })
+            .catch((error)=> {
+              // this.$Message.info("搜索失败");
+              console.log(error);
+            });
         },
         get_leaves(){
           this.$axios.post('/api/leaveDeals', {status:this.status,id:this.id})

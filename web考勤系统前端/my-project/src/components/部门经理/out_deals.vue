@@ -165,7 +165,20 @@
           ]
         }
       },
+      mounted:function () {
+        this.getMessage();
+      },
       methods: {
+        getMessage(){
+          this.$axios.post('/api/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
+            .then((response)=> {
+              this.data7 = response.data;
+            })
+            .catch((error)=> {
+              // this.$Message.info("搜索失败");
+              console.log(error);
+            });
+        },
         exportData(type) {
           if (type === 1) {
             this.$refs.table.exportCsv({
