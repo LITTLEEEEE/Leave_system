@@ -13,7 +13,7 @@
           </menu-item>
           <router-link to="/punch">
             <menu-item name="2">
-              <icon type="ios-contact"></icon>
+              <Icon type="ios-time" />
               上班打卡
             </menu-item>
           </router-link>
@@ -43,8 +43,14 @@
           </router-link>
           <router-link to="/others">
             <menu-item name="6">
-              <icon type="ios-contact"></icon>
+              <Icon type="ios-contacts" />
               同部门员工请假信息查询
+            </menu-item>
+          </router-link>
+          <router-link to="/">
+            <menu-item name="7">
+              <Icon type="md-power" />
+              注销
             </menu-item>
           </router-link>
         </div>
@@ -65,7 +71,7 @@
       <FormItem label="请假原因详情" prop="reason">
         <Input v-model="formValidate.reason" placeholder="详细说明您请假原因"></Input>
       </FormItem>
-      <FormItem label="说明请假天数" prop="reason">
+      <FormItem label="说明请假天数" prop="days">
         <Input v-model="formValidate.days" placeholder="说明请假天数"></Input>
       </FormItem>
       <FormItem prop="date">

@@ -12,7 +12,7 @@
       </menu-item>
       <router-link to="/punch2">
         <menu-item name="2">
-          <icon type="ios-contact"></icon>
+          <Icon type="ios-time" />
           打卡
         </menu-item>
       </router-link>
@@ -45,6 +45,12 @@
         <menu-item name="6">
           <icon type="ios-contact"></icon>
           外出申请
+        </menu-item>
+      </router-link>
+      <router-link to="/">
+        <menu-item name="7">
+          <Icon type="md-power" />
+          注销
         </menu-item>
       </router-link>
     </div>

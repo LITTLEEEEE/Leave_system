@@ -62,36 +62,37 @@ export default {
   methods:{
     login(){
       //this.$Message.info(this.model1);
-      // this.$axios.post("/login",{id:this.id, passwords:this.passwords})
-      //   .then((response) => {
-      //
-      //     if (response.data.result == true) {
-      //       this.$Message.info("提交成功");
-      //       sessionStorage.setItem("userId", this.id);
-      //       sessionStorage.setItem("userStatus",response.data.status);
-      //       //sessionStorage.setItem("userToken", response.data.token);
-      //       if(sessionStorage.getItem("userStatus") == "staff"){
-      //         this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
-      //       }
-      //       else if(sessionStorage.getItem("userStatus") == "department_manager"){
-      //         this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
-      //       }
-      //       else if(sessionStorage.getItem("userStatus") == 'deputy_general_manager'){
-      //         this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
-      //       }
-      //       else {
-      //         this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
-      //       }
-      //     }
-      //     else {
-      //       this.$Message.info("账号或密码不正确请重试");
-      //     }
-      //
-      //   })
-      //   .catch(function (error) {
-      //     //this.$Message.info("服务器出错，注册失败" + error.data);
-      //     console.log(error)
-      //   });
+      this.$axios.post("http://172.23.78.164:8080/vacate/user/signin",{id:this.id, passwords:this.passwords})
+        .then((response) => {
+          console.log(response);
+
+          if (response.data.result == true) {
+            this.$Message.info("提交成功");
+            sessionStorage.setItem("userId", this.id);
+            sessionStorage.setItem("userStatus",response.data.status);
+            //sessionStorage.setItem("userToken", response.data.token);
+            if(sessionStorage.getItem("userStatus") == "staff"){
+              this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
+            }
+            else if(sessionStorage.getItem("userStatus") == "department_manager"){
+              this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
+            }
+            else if(sessionStorage.getItem("userStatus") == 'deputy_general_manager'){
+              this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
+            }
+            else {
+              this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
+            }
+          }
+          else {
+            this.$Message.info("账号或密码不正确请重试");
+          }
+
+        })
+        .catch(function (error) {
+          //this.$Message.info("服务器出错，注册失败" + error.data);
+          console.log(error)
+        });
 
       sessionStorage.setItem("userId",this.id);
       sessionStorage.setItem("userToken", this.model1);

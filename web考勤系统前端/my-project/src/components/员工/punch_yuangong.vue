@@ -12,7 +12,7 @@
         </menu-item>
         <router-link to="/punch">
           <menu-item name="2">
-            <icon type="ios-contact"></icon>
+            <Icon type="ios-time" />
             上班打卡
           </menu-item>
         </router-link>
@@ -42,15 +42,21 @@
         </router-link>
         <router-link to="/others">
           <menu-item name="6">
-            <icon type="ios-contact"></icon>
+            <Icon type="ios-contacts" />
             同部门员工请假信息查询
+          </menu-item>
+        </router-link>
+        <router-link to="/">
+          <menu-item name="7">
+            <Icon type="md-power" />
+            注销
           </menu-item>
         </router-link>
       </div>
     </i-menu>
 
     <p style="position: absolute; top: 75px;left: 30px;font-size: 20px">输入您的账号</p>
-    <Input prefix="ios-contact" placeholder="输入卡号" v-model="id" style="width: auto; position: absolute; top: 75px; left: 200px"></Input>
+    <Input prefix="ios-contact" placeholder="输入卡号" v-model="id" style="width: auto; position: absolute; top: 75px; left: 200px"> </Input>
     <Button @click="punch(1)" style="position: absolute; top: 130px;left: 250px;">打卡上班</Button>
     <Button type="primary" @click="punch(0)" style="position: absolute; top: 130px;left: 350px;">打卡下班</Button>
   </div>

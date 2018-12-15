@@ -12,7 +12,7 @@
         </menu-item>
         <router-link to="/punch2">
           <menu-item name="2">
-            <icon type="ios-contact"></icon>
+            <Icon type="ios-time" />
             打卡
           </menu-item>
         </router-link>
@@ -46,6 +46,12 @@
             外出申请
           </menu-item>
         </router-link>
+        <router-link to="/">
+          <menu-item name="7">
+            <Icon type="md-power" />
+            注销
+          </menu-item>
+        </router-link>
       </div>
     </i-menu>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" style="position: absolute; top: 150px;width: 800px;left: 200px;">
@@ -63,7 +69,7 @@
       <FormItem label="请假原因详情" prop="reason">
         <Input v-model="formValidate.reason" placeholder="详细说明您请假原因"></Input>
       </FormItem>
-      <FormItem label="说明请假天数" prop="reason">
+      <FormItem label="说明请假天数" prop="days">
         <Input v-model="formValidate.days" placeholder="说明请假天数"></Input>
       </FormItem>
       <FormItem prop="date">

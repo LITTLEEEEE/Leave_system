@@ -28,6 +28,12 @@
             外出审批
           </menu-item>
         </router-link>
+        <router-link to="/">
+          <menu-item name="7">
+            <Icon type="md-power" />
+            注销
+          </menu-item>
+        </router-link>
       </div>
     </i-menu>
 
