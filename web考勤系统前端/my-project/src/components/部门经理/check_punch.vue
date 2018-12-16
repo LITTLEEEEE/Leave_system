@@ -156,7 +156,7 @@
       },
       methods: {
           getMessage(){
-            this.$axios.post('/api/check', {status:this.status,id:this.id})
+            this.$axios.post('http://192.168.21.102:9090/check', {status:this.status,id:this.id})
               .then((response)=> {
                 this.data7 = response.data;
               })
@@ -184,7 +184,7 @@
           }
         },
         get_punch(){//name,state,id,time,department json数组
-          this.$axios.post('/api/check', {status:this.status,id:this.id})
+          this.$axios.post('http://192.168.21.102:9090/check', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })

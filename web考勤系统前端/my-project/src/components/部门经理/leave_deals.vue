@@ -233,7 +233,7 @@
             });
         },
         show(index){
-          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description})
+          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:1})
             .then((response)=> {
               console.log(response);
               if(response.data.result == true){
@@ -249,7 +249,7 @@
             });
         },
         remove(index){
-          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description})
+          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:1})
             .then((response)=> {
               console.log(response);
               if(response.data.result == true){

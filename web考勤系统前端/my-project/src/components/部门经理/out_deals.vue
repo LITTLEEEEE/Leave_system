@@ -176,7 +176,7 @@
       },
       methods: {
         getMessage(){
-          this.$axios.post('/api/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
+          this.$axios.post('http://192.168.21.102:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -204,7 +204,7 @@
           }
         },
         get_outs(){
-          this.$axios.post('/api/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
+          this.$axios.post('http://192.168.21.102:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -214,7 +214,7 @@
             });
         },
         show(index){//部门经理通过
-          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description})
+          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:0})
             .then((response)=> {
               console.log(response);
               if(response.data.result == true){
@@ -229,7 +229,7 @@
             });
         },
         remove(index){//部门经理未通过
-          this.$axios.post('/api/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description})
+          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:0})
             .then((response)=> {
               console.log(response);
               if(response.data.result == true){

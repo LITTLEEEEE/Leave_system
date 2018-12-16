@@ -121,7 +121,7 @@
       },
       methods:{
         getMessage() {
-          this.$axios.post('/api/getOthers', {id: this.id,time:this.date.toLocaleDateString()})
+          this.$axios.post('http://192.168.21.102:9090/getOthers', {id: this.id,time:this.date.toLocaleDateString()})
             .then((response) => {
               this.$Message.info("提交成功");
               this.data7 = response.data;
@@ -132,7 +132,7 @@
             });
         },
           get_others(){
-            this.$axios.post('/api/getOthers', {id:this.id,time:this.date.toLocaleDateString()})
+            this.$axios.post('http://192.168.21.102:9090/getOthers', {id:this.id,time:this.date.toLocaleDateString()})
               .then((response) => {
                 this.data7 = response.data;
               })

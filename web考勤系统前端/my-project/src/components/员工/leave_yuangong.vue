@@ -131,7 +131,7 @@
               console.log(this.dataValue);
               console.log(this.dataValue[1]);
               console.log(this.dataValue[0]);//卡号，原因，原因类别，开始时间，结束时间，天数，
-              this.$axios.post('/api/leave', {status :this.status,id: this.formValidate.id, reason: this.formValidate.reason, item:this.formValidate.item, time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
+              this.$axios.post('http://192.168.21.102:9090/leave', {status :this.status,id: this.formValidate.id, reason: this.formValidate.reason, item:this.formValidate.item, time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
                 .then((response) => {
 
                   if (response.data.result == true) {

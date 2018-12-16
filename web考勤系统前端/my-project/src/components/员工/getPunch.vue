@@ -119,7 +119,7 @@
         //     });
         // },
         getPunch(){
-          this.$axios.post('/api/getPunch', {id: this.id,status:this.status})
+          this.$axios.post('http://192.168.21.102:9090/getPunch', {id: this.id,status:this.status})
             .then((response) => {
               console.log(response.data);
               console.log(response);

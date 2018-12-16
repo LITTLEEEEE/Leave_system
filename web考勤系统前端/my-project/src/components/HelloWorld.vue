@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import Img from '@/assets/working.png'
+  import Img from '@/assets/33.png'
 export default {
   name: 'HelloWorld',
   data () {
@@ -62,14 +62,16 @@ export default {
   methods:{
     login(){
       //this.$Message.info(this.model1);
-      this.$axios.post("http://172.23.78.164:8080/vacate/user/signin",{id:this.id, passwords:this.passwords})
+      this.$axios.post('http://192.168.21.102:9090/login',{id :this.id, passwords:this.passwords})
         .then((response) => {
-          console.log(response);
+          console.log(response.data.result);
 
           if (response.data.result == true) {
             this.$Message.info("提交成功");
             sessionStorage.setItem("userId", this.id);
             sessionStorage.setItem("userStatus",response.data.status);
+            console.log(sessionStorage.getItem("userId"));
+            console.log(sessionStorage.getItem("userStatus"));
             //sessionStorage.setItem("userToken", response.data.token);
             if(sessionStorage.getItem("userStatus") == "staff"){
               this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
@@ -94,30 +96,30 @@ export default {
           console.log(error)
         });
 
-      sessionStorage.setItem("userId",this.id);
-      sessionStorage.setItem("userToken", this.model1);
-      sessionStorage.setItem("userStatus", this.model1);
-      //this.$store.dispatch("setUser",this.id);
-      // this.$store.dispatch("setToken", this.model1);
-      //console.log(this.$store.state.isLogin);
-      console.log(sessionStorage.getItem("userId"));
-      console.log(sessionStorage.getItem("userToken"));
-      console.log(sessionStorage.getItem("userStatus"));
-      if(this.model1 == 'staff'){
-        this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
-      }
-      else if(this.model1 == 'department_manager'){
-        this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
-      }
-      else if(this.model1 == 'deputy_general_manager'){
-        this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
-      }
-      else{
-        this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
-      }
-
-
-    },
+    //   sessionStorage.setItem("userId",this.id);
+    //   sessionStorage.setItem("userToken", this.model1);
+    //   sessionStorage.setItem("userStatus", this.model1);
+    //   //this.$store.dispatch("setUser",this.id);
+    //   // this.$store.dispatch("setToken", this.model1);
+    //   //console.log(this.$store.state.isLogin);
+    //   console.log(sessionStorage.getItem("userId"));
+    //   console.log(sessionStorage.getItem("userToken"));
+    //   console.log(sessionStorage.getItem("userStatus"));
+    //   if(this.model1 == 'staff'){
+    //     this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
+    //   }
+    //   else if(this.model1 == 'department_manager'){
+    //     this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
+    //   }
+    //   else if(this.model1 == 'deputy_general_manager'){
+    //     this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
+    //   }
+    //   else{
+    //     this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
+    //   }
+    //
+    //
+     },
     again(){
        this.passwords = '';
        this.id = '';
