@@ -120,14 +120,14 @@
             ],
             data7: [
               {
-                "time_start":"2018-1-3",
-                "time_end":"2018-1-7",
-                "item":"病假",
-                "reason":"发烧感冒四肢无力腰酸背痛手脚冰凉",
-                "state":"审批通过",
-                "left_days":3,
+                "time_start":"0000-00-00",
+                "time_end":"0000-00-00",
+                "item":"",
+                "reason":"",
+                "state":"",
+                "left_days":0,
                 "description":"无",
-                "id":"4"
+                "id":""
 
               }
 
@@ -140,7 +140,7 @@
       },
       methods: {
         getMessage() {
-          this.$axios.post('http://192.168.21.102:9090/getOut', {id: this.id,status:this.status})
+          this.$axios.post('http://localhost:9090/getOut', {id: this.id,status:this.status})
             .then((response) => {
               this.$Message.info("提交成功");
               this.data7 = response.data;
@@ -169,7 +169,7 @@
           }
         },
         get_leaves() {
-          this.$axios.post('http://192.168.21.102:9090i/getOut', {id:this.id,status:this.status})
+          this.$axios.post('http://localhost:9090/getOut', {id:this.id,status:this.status})
             .then((response) => {
               this.data7 = response.data;
             })

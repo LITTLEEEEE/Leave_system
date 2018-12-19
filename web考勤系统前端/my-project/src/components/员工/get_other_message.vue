@@ -104,11 +104,11 @@
             ],
             data7: [
               {
-                "time_start":"2018-1-3",
-                "time_end":"2018-1-7",
-                "u_id":"3016218125",
-               "u_name":"李狗蛋",
-                "u_work":"项目开发"
+                "time_start":"",
+                "time_end":"",
+                "u_id":"",
+               "u_name":"",
+                "u_work":""
 
               }
 
@@ -121,7 +121,7 @@
       },
       methods:{
         getMessage() {
-          this.$axios.post('http://192.168.21.102:9090/getOthers', {id: this.id,time:this.date.toLocaleDateString()})
+          this.$axios.post('http://localhost:9090/getOthers', {id: this.id,time:this.date.toLocaleDateString()})
             .then((response) => {
               this.$Message.info("提交成功");
               this.data7 = response.data;
@@ -132,7 +132,7 @@
             });
         },
           get_others(){
-            this.$axios.post('http://192.168.21.102:9090/getOthers', {id:this.id,time:this.date.toLocaleDateString()})
+            this.$axios.post('http://localhost:9090/getOthers', {id:this.id,time:this.date.toLocaleDateString()})
               .then((response) => {
                 this.data7 = response.data;
               })

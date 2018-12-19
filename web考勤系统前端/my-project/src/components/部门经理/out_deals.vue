@@ -158,13 +158,13 @@
           ],
           data7: [
             {
-              "d_id":"1",
-              "u_id":"1",
-              "u_name":'李狗蛋',
-              "reason":"出差",
-              "days":3,
-              "time_start":'2018-1-4',
-              "time_end":'2018-1-7',
+              "d_id":"",
+              "u_id":"",
+              "u_name":'',
+              "reason":"",
+              "days":0,
+              "time_start":'0000-00-00',
+              "time_end":'0000-00-00',
 
             }
 
@@ -176,7 +176,7 @@
       },
       methods: {
         getMessage(){
-          this.$axios.post('http://192.168.21.102:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
+          this.$axios.post('http://localhost:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -204,7 +204,7 @@
           }
         },
         get_outs(){
-          this.$axios.post('http://192.168.21.102:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
+          this.$axios.post('http://localhost:9090/outDeals', {status:this.status,id:this.id})//还未处理过的员工的请假信息
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -214,10 +214,10 @@
             });
         },
         show(index){//部门经理通过
-          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:0})
+          this.$axios.post('http://localhost:9090/deals', {did:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:0})
             .then((response)=> {
               console.log(response);
-              if(response.data.result == true){
+              if(response.data == true){
                 this.$Message.info("处理成功");
               }else{
                 this.$Message.info("处理失败重新提交");
@@ -229,10 +229,10 @@
             });
         },
         remove(index){//部门经理未通过
-          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:0})
+          this.$axios.post('http://localhost:9090/deals', {did:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:0})
             .then((response)=> {
               console.log(response);
-              if(response.data.result == true){
+              if(response.data == true){
                 this.$Message.info("处理成功");
               }
               else{

@@ -1,19 +1,19 @@
 <template>
   <div :style="{backgroundImage: 'url(' + img + ')'}" style=" position: absolute; top: 0px;width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover">
     <div class="first-words">
-      <p style="font-size: 70px; position:absolute; color: white; top: 100px; left: 100px">
+      <p style="font-size: 70px; position:absolute; color: white; top: 10%; left: 10%">
         考勤-管理系统
       </p>
-      <p style="font-size: 40px; position:absolute; color: white; top: 200px; left: 50%; margin-left:-350px;font-style: italic">
+      <p style="font-size: 40px; position:absolute; color: white; top: 20%; left: 20%;font-style: italic">
         --------designed by 单馃子购买流
       </p>
     </div>
-    <div style="position: absolute; top:300px; left: 400px;width: 600px; height: 400px; opacity: 0.7; background-color: black">
-      <Input prefix="ios-contact" v-model="id" placeholder="输入您公司卡号" style="position:absolute;top:50px; left: 50px; width: 300px" />
-      <i-input  type = "password" v-model="passwords" placeholder="输入您的密码" style="position:absolute;top:100px; left: 50px; width: 300px"/>
-      <Select v-model="model1" placeholder="输入您的职位" style="position:absolute;top:150px; left: 50px; width: 300px">
-        <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-      </Select>
+    <div style="position: absolute; top:30%; left: 20%;width: 50%; height: 50%; opacity: 0.7; background-color: black">
+      <Input prefix="ios-contact" v-model="id" placeholder="输入您公司卡号" style="position:absolute;top:20%; left: 10%; width: 70%" />
+      <i-input  type = "password" v-model="passwords" placeholder="输入您的密码" style="position:absolute;top:30%; left: 10%; width: 70%"/>
+      <!--<Select v-model="model1" placeholder="输入您的职位" style="position:absolute;top:150px; left: 50px; width: 300px">-->
+        <!--<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
+      <!--</Select>-->
 
       <i-button type = "default" @click="login" style="position:absolute;top:300px; left: 400px; width: 150px" >
         登录
@@ -38,31 +38,31 @@ export default {
        img:Img,
       id:'',
       passwords:'',
-      cityList: [
-        {
-          value: 'staff',
-          label: '普通员工'
-        },
-        {
-          value: 'department_manager',
-          label: '部门经理'
-        },
-        {
-          value: 'deputy_general_manager',
-          label: '副总经理'
-        },
-        {
-          value: 'general_manager',
-          label: '总经理'
-        },
-      ],
-      model1: ''
+      // cityList: [
+      //   {
+      //     value: 'staff',
+      //     label: '普通员工'
+      //   },
+      //   {
+      //     value: 'department_manager',
+      //     label: '部门经理'
+      //   },
+      //   {
+      //     value: 'deputy_general_manager',
+      //     label: '副总经理'
+      //   },
+      //   {
+      //     value: 'general_manager',
+      //     label: '总经理'
+      //   },
+      // ],
+      //model1: ''
     }
   },
   methods:{
     login(){
       //this.$Message.info(this.model1);
-      this.$axios.post('http://192.168.21.102:9090/login',{id :this.id, passwords:this.passwords})
+      this.$axios.post('http://localhost:9090/login',{id :this.id, passwords:this.passwords})
         .then((response) => {
           console.log(response.data.result);
 
@@ -75,15 +75,19 @@ export default {
             //sessionStorage.setItem("userToken", response.data.token);
             if(sessionStorage.getItem("userStatus") == "staff"){
               this.$router.push({name:'user',params:{id:this.id,changemessage: true}});
+              this.$Message.info("登录成功");
             }
             else if(sessionStorage.getItem("userStatus") == "department_manager"){
               this.$router.push({name:'messager',params:{id:this.id,changemessage: true}});
+              this.$Message.info("登录成功");
             }
             else if(sessionStorage.getItem("userStatus") == 'deputy_general_manager'){
               this.$router.push({name:'messager2',params:{id:this.id,changemessage: true}});
+              this.$Message.info("登录成功");
             }
             else {
               this.$router.push({name:'messager3',params:{id:this.id,changemessage: true}});
+              this.$Message.info("登录成功");
             }
           }
           else {
@@ -123,7 +127,7 @@ export default {
     again(){
        this.passwords = '';
        this.id = '';
-       this.model1 = '';
+       //this.model1 = '';
     }
   }
 }

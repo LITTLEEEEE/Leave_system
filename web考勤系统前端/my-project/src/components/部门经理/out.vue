@@ -119,9 +119,9 @@
               console.log(this.dataValue);
               console.log(this.dataValue[1]);
               console.log(this.dataValue[0]);//卡号，原因，原因类别，开始时间，结束时间，天数，
-              this.$axios.post('http://192.168.21.102:9090/out', {status:this.status,id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
+              this.$axios.post('http://localhost:9090/out', {status:this.status,id: this.formValidate.id, reason: this.formValidate.reason,  time_start: this.dataValue[0],time_end: this.dataValue[1],days:this.formValidate.days})
                 .then((response) => {
-
+                  console.log(response);
                   if (response.data == true) {
                     this.$Message.info("提交成功");
                   }

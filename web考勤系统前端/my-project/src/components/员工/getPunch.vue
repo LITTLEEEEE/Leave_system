@@ -73,31 +73,23 @@
             columns5: [
               {
                 title: '日期',
-                key: 'date',
+                key: 'punch_time',
                 sortable: true
               },
 
               {
                 title: '打卡信息',
-                key: 'punch',
+                key: 'description',
                 sortable:true
               },
 
             ],
             data5: [
               {
-                date: '2016-10-03',
-                punch:'已打卡'
+                punch_time: '0000-00-00',
+                description:'无'
               },
-              {
 
-                date: '2016-10-01',
-                punch:'未打卡'
-              },
-              {
-                date: '2016-10-02',
-                punch:'已打卡'
-              },
 
             ]
           }
@@ -119,7 +111,7 @@
         //     });
         // },
         getPunch(){
-          this.$axios.post('http://192.168.21.102:9090/getPunch', {id: this.id,status:this.status})
+          this.$axios.post('http://localhost:9090/getPunch', {id: this.id,status:this.status})
             .then((response) => {
               console.log(response.data);
               console.log(response);

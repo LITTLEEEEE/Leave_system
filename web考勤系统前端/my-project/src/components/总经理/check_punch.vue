@@ -125,11 +125,11 @@
           ],
           data7: [
             {
-              "u_name": "李狗蛋",
-              "state" : 1,
-              "u_id" : '3016218125',
-              "time": '2017-1-1',
-              "u_work":'睡觉'
+              "u_name": "",
+              "state" : 0,
+              "u_id" : '',
+              "time": '0000-00-00',
+              "u_work":''
             },
 
 
@@ -141,7 +141,7 @@
       },
       methods: {
         getMessage(){
-          this.$axios.post('http://192.168.21.102:9090/check', {status:this.status,id:this.id})
+          this.$axios.post('http://localhost:9090/check', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -169,7 +169,7 @@
           }
         },
         get_punch(){//name,state,id,time,department json数组
-          this.$axios.post('http://192.168.21.102:9090/check', {status:this.status,id:this.id})
+          this.$axios.post('http://localhost:9090/check', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })

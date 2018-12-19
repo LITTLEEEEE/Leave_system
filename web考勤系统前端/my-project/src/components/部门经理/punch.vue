@@ -78,7 +78,7 @@
             console.log(this.date.toLocaleDateString());
             console.log(this.id);
             console.log(this.status);
-            this.$axios.post('http://192.168.21.102:9090/punch', {id:this.id, function: '1',status:this.status,punch_date:this.date.toLocaleDateString()})
+            this.$axios.post('http://localhost:9090/punch', {id:this.id, function: '1',status:this.status,punch_date:this.date.toLocaleDateString()})
               .then((response) => {
                 console.log(response);
 
@@ -96,7 +96,7 @@
               });
 
           }else{
-            this.$axios.post('/api/punch', {id:this.id, function: '2',status:this.status,punch_date:this.date.toLocaleDateString()})
+            this.$axios.post('http://localhost:9090/punch', {id:this.id, function: '2',status:this.status,punch_date:this.date.toLocaleDateString()})
               .then((response) => {
 
                 if (response.data.result == true) {

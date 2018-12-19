@@ -159,15 +159,15 @@
           ],
           data7: [
             {
-              "d_id":"1",
-              "u_id":"1",
-              "u_name":"李狗蛋",
-              "item":"病假",
-              "reason":"发烧感冒四肢无力腰酸背痛手脚冰凉",
-              "days":3,
-              "left_days":5,
-              "time_start":'2017-1-5',
-              "time_end":'2017-1-8',
+              "d_id":"",
+              "u_id":"",
+              "u_name":"",
+              "item":"",
+              "reason":"",
+              "days":0,
+              "left_days":0,
+              "time_start":'0000-00-00',
+              "time_end":'0000-00-00',
             }
 
           ]
@@ -196,7 +196,7 @@
           }
         },
         getMessage(){
-          this.$axios.post('http://192.168.21.102:9090/leaveDeals', {status:this.status,id:this.id})
+          this.$axios.post('http://localhost:9090/leaveDeals', {status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -206,7 +206,7 @@
             });
         },
         get_leaves(){
-          this.$axios.post('http://192.168.21.102:9090/leaveDeals',{status:this.status,id:this.id})
+          this.$axios.post('http:/localhost:9090/leaveDeals',{status:this.status,id:this.id})
             .then((response)=> {
               this.data7 = response.data;
             })
@@ -216,10 +216,10 @@
             });
         },
         show(index){
-          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:1})
+          this.$axios.post('http://localhost:9090/deals', {did:this.data7[index].d_id, admission: "1",status:this.status,description:this.description,function:1})
             .then((response)=> {
               console.log(response);
-              if(response.data.result == true){
+              if(response.data == true){
                 this.$Message.info("处理成功");
               }
               else{
@@ -232,10 +232,10 @@
             });
         },
         remove(index){
-          this.$axios.post('http://192.168.21.102:9090/deals', {d_id:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:1})
+          this.$axios.post('http://localhost:9090/deals', {did:this.data7[index].d_id, admission: "0",status:this.status,description:this.description,function:1})
             .then((response)=> {
               console.log(response);
-              if(response.data.result == true){
+              if(response.data == true){
                 this.$Message.info("处理成功");
               }
               else{
