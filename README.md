@@ -11,6 +11,7 @@ web大作业
 分工：
 文档：
 代码：
+后端----------------------------------------------------
 webHomework
 刘岳森：
 spring-boot项目整体搭建
@@ -27,5 +28,7 @@ src\main\java\com\example\demo\common\DealController.java
 src\main\java\com\example\demo\common\Outcontroller.java
 src\main\java\com\example\demo\common\CheckController.java
 src\main\java\com\example\demo\common\JudgeAndSearchController.java
-
+前端-----------------------------------------------------
+肖业凡：
+web考勤系统前端
 ---------------------------------------------------------
