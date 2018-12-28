@@ -18,7 +18,7 @@ web大作业
 webHomework
 刘岳森：
 spring-boot项目整体搭建
-服务器部署
+服务器部署、数据库设计
 src\main\java\com\example\demo\java-PunchController.java
 src\main\java\com\example\demo\common\LoginController.java
 万子航：
